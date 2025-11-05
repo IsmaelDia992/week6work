@@ -34,7 +34,6 @@ filename = input("Enter the filename: ").strip()
 output_filename = f"{filename}_out.csv"
 
 with open(filename) as student_data, open(output_filename, "w") as student_output:
-    # skip header line (example files have a header)
     next(student_data)
 
     for line in student_data:
@@ -47,8 +46,6 @@ with open(filename) as student_data, open(output_filename, "w") as student_outpu
             continue
 
         student_id = parts[0]
-
-        # accumulate grades using your style (explicit loop)
         total_grade_points = 0.0
         module_count = 0
         for value in parts[1:]:
@@ -56,15 +53,12 @@ with open(filename) as student_data, open(output_filename, "w") as student_outpu
                 total_grade_points += float(value)
                 module_count += 1
 
-        # compute average (handle zero modules defensively)
+
         if module_count == 0:
             average_grade = 0.0
         else:
             average_grade = total_grade_points / module_count
-
         average_str = f"{average_grade:.2f}"
-
-        # classification logic (no extra function, as requested)
         if average_grade >= 70:
             classification = "1"
         elif average_grade >= 60:
@@ -75,6 +69,5 @@ with open(filename) as student_data, open(output_filename, "w") as student_outpu
             classification = "3"
         else:
             classification = "F"
-
         student_output.write(f"{student_id},{average_str},{classification}\n")
 
